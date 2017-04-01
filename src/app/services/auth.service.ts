@@ -1,12 +1,28 @@
 import { Injectable } from '@angular/core';
 import {User} from '../models/user';
 
+const _CURRENT_USER_KEY = "theros.currentUser";
+const storage = sessionStorage;
+
 @Injectable()
 export class AuthService {
 
-  currentUser: User;
+  private _currentUser: User;
+  get currentUser(): User {
+    return this._currentUser;
+  }
+  set currentUser(user: User) {
+    this._currentUser = user;
+    storage.setItem(_CURRENT_USER_KEY, JSON.stringify(user));
+  }
 
-  constructor() { }
+
+  constructor() {
+    var json = storage.getItem(_CURRENT_USER_KEY);
+    if (json) {
+      this._currentUser = JSON.parse(json);
+    }
+  }
 
   signIn(username: string, password: string): Promise<boolean> {
     if (username == "foo" && password == "bar") {
