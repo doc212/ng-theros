@@ -12,8 +12,8 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-  signIn(username:string, password:string){
-    
+  signIn(username: string, password: string) {
+
   }
 
 }
