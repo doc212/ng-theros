@@ -5,8 +5,8 @@ export class AuthService {
 
   constructor() { }
 
-  signIn(username: string, password: string): void {
-
+  signIn(username: string, password: string): Promise<boolean> {
+    return Promise.resolve(username == "foo" && password == "bar");
   }
 
 }
