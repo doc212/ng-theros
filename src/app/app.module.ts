@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 
 import {AuthService} from "./services/auth.service";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent
+    SigninComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
