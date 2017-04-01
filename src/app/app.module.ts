@@ -10,12 +10,14 @@ import { SigninComponent } from './signin/signin.component';
 
 import {AuthService} from "./services/auth.service";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
