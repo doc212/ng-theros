@@ -17,4 +17,6 @@ export class AuthService {
     return Promise.resolve(!!this.currentUser);
   }
 
+  get isLoggedIn(): boolean { return !!this.currentUser; }
+
 }

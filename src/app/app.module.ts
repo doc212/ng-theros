@@ -8,6 +8,7 @@ import {app_routing} from "./app.routing"
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 
+import {AuthGuard} from './services/auth.guard';
 import {AuthService} from "./services/auth.service";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
@@ -27,6 +28,7 @@ import { HomeComponent } from './home/home.component';
     HttpModule
   ],
   providers: [
+    AuthGuard,
     AuthService
   ],
   bootstrap: [AppComponent]
