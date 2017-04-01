@@ -1,3 +1,8 @@
-<p>
-  signin works!
-</p>
+<div class="container">
+  <form class="form-signin" onsubmit="return false;">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <input type="text" #inputEmail class="form-control" placeholder="Your name" required autofocus>
+    <input type="password" #inputPassword class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" (click)="signIn(inputEmail.value, inputPassword.value)">Sign in</button>
+  </form>
+</div>
