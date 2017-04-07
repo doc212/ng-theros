@@ -1,0 +1,22 @@
+[
+    {
+        "student": {
+            "fullname": "Foo Bar"
+        },
+        "class": "1CA",
+        "type": "TDV",
+        "subject": "MATH4 - Mathématiques",
+        "teacher": "Prof.",
+        "result": "B"
+    },
+    {
+        "student": {
+            "fullname": "Foo Bar"
+        },
+        "class": "1CA",
+        "type": "TDV",
+        "subject": "MATH4 - Mathématiques",
+        "teacher": "Prof.",
+        "result": "B"
+    }
+]

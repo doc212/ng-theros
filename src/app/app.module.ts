@@ -4,15 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { RouterModule } from '@angular/router';
-import {app_routing} from "./app.routing"
+import { app_routing } from "./app.routing"
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 
-import {AuthGuard} from './services/auth.guard';
-import {AuthService} from "./services/auth.service";
+import { AuthGuard } from './services/auth.guard';
+import { AuthService } from "./services/auth.service";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { WorksIndexComponent } from './works-index/works-index.component';
+import { WorksService } from "app/services/works.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { WorksIndexComponent } from './works-index/works-index.component';
   ],
   providers: [
     AuthGuard,
+    WorksService,
     AuthService
   ],
   bootstrap: [AppComponent]
