@@ -51,6 +51,11 @@ module.exports = {
     "filename": "[name].bundle.js",
     "chunkFilename": "[id].chunk.js"
   },
+  "devServer":{
+    "historyApiFallback":{
+      "index":"/index.html"
+    }
+  },
   "module": {
     "rules": [
       {
