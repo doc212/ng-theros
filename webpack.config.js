@@ -23,6 +23,7 @@ module.exports = {
   "resolve": {
     "extensions": [
       ".ts",
+      ".slim",
       ".js"
     ],
     "modules": [
@@ -65,6 +66,9 @@ module.exports = {
         "exclude": [
           /\/node_modules\//
         ]
+      },
+      {
+        "test":/\.slim$/,"loader":"raw-loader!slm-loader"
       },
       {
         "test": /\.json$/,

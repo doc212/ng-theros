@@ -4,7 +4,7 @@ import { Work } from "app/models/work";
 
 @Component({
   selector: 'app-works-index',
-  templateUrl: './works-index.component.html',
+  templateUrl: './works-index.component.html.slim',
   styleUrls: ['./works-index.component.css']
 })
 export class WorksIndexComponent implements OnInit {

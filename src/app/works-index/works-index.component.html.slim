@@ -1,0 +1,19 @@
+.container
+    table.table
+        thead
+            tr
+                th Nom
+                th Classe
+                th Type
+                th Cours
+                th Professeur
+                th Résultat
+        tbody
+            tr *ngFor="let work of works"
+                td {{work.student.fullname}}
+                td {{work.class}}
+                td {{work.type}}
+                td {{work.subject}}
+                td {{work.teacher}}
+                td {{work.result}}
+
