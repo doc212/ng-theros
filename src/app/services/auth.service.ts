@@ -13,19 +13,14 @@ export class AuthService {
   get currentUser(): User {
     return this._currentUser;
   }
-  set currentUser(user: User) {
-    this._currentUser = user;
-    storage.setItem(_CURRENT_USER_KEY, JSON.stringify(user));
-  }
-
 
   constructor(
-    private api : ApiService
-  ) {
+    private api: ApiService
+  ) { }
+
+  loadFromStorage() {
     var json = storage.getItem(_CURRENT_USER_KEY);
-    if (json) {
-      this._currentUser = JSON.parse(json);
-    }
+    this.handleResponse(JSON.parse(json), false);
   }
 
   getUsers(): Promise<User[]> {
@@ -41,11 +36,11 @@ export class AuthService {
         password: password
       }).then((resp) => {
         if (resp.ok) {
-          _this.currentUser = resp.json().user;
+          _this.handleResponse(resp.json());
           resolve(true);
         } else {
           console.log("response not ok", resp.status);
-          _this.currentUser = null;
+          _this.handleResponse(null);
           resolve(false);
         }
       }, (err) => {
@@ -60,6 +55,21 @@ export class AuthService {
   get isLoggedIn(): boolean { return !!this.currentUser; }
 
   signOut(): void {
-    this.currentUser = null;
+    this.handleResponse(null);
+  }
+
+  private handleResponse(response: any, persist = true) {
+    console.log("handleAuthResponse", response);
+    if (persist)
+      storage.setItem(_CURRENT_USER_KEY, JSON.stringify(response));
+    if (response) {
+      this._currentUser = response.user;
+      this.api.token = response.token;
+    }
+    else {
+      this._currentUser = null;
+      this.api.token = null;
+    }
+
   }
 }
