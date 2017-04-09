@@ -41,7 +41,7 @@ export class AuthService {
         password: password
       }).subscribe((resp) => {
         if (resp.ok) {
-          _this.currentUser = { fullname: "Foo Bar", id: 1 };
+          _this.currentUser = resp.json().user;
           resolve(true);
         } else {
           console.log("response not ok", resp.status);
