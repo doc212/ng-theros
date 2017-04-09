@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import "rxjs/add/operator/map";
 import { Work } from "app/models/work";
+import { ApiService } from "app/services/api.service";
 
 
 @Injectable()
 export class WorksService {
 
   constructor(
-    private http: Http
+    private api: ApiService
   ) { }
 
   getWorks(): Promise<Work[]> {
-    return this.http.get("assets/mock-data/works.json").map(resp => resp.json() as Work[]).toPromise();
+    return this.api.get("/works").then(resp => resp.json() as Work[]);
   }
 }
