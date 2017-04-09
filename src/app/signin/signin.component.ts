@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
-import {AuthService} from '../services/auth.service';
+import { AuthService } from '../services/auth.service';
+import { User } from "app/models/user";
 
 @Component({
   selector: 'app-signin',
@@ -15,16 +16,28 @@ export class SigninComponent implements OnInit {
     private auth: AuthService
   ) { }
 
+  selectedUser: User = null;
+  users: User[] = null;
+
   ngOnInit() {
+    this.auth.getUsers().then((users) => {
+      this.users = [null].concat(users);
+      this.selectedUser = null;
+    });
   }
 
-  signIn(username: string, password: string) {
-    this.auth.signIn(username, password).then((loggedIn) => {
-      console.log("logged in", loggedIn);
-      if (loggedIn) {
-        this.router.navigate(["home"]);
-      }
-    });
+  signIn(password: string) {
+    if (!this.selectedUser) {
+      console.log("no user selected");
+    } else {
+      this.auth.signIn(this.selectedUser.id, password)
+        .then((loggedIn) => {
+          console.log("logged in", loggedIn);
+          if (loggedIn) {
+            this.router.navigate(["home"]);
+          }
+        });
+    }
   }
 
 }
