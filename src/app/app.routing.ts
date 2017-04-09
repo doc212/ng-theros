@@ -6,7 +6,7 @@ import { AuthGuard } from './services/auth.guard';
 import { WorksIndexComponent } from "app/works-index/works-index.component";
 
 const app_routes: Routes = [
-  { path: 'works', component: WorksIndexComponent },
+  { path: 'works', component: WorksIndexComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: "home", pathMatch: "full" },
