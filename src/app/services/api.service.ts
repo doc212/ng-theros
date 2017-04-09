@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptionsArgs, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { Http, RequestOptionsArgs, Response, Headers } from "@angular/http";
+
+import "rxjs/add/operator/toPromise";
 
 const API_URL = "http://localhost/~doc212/theros/app_dev.php/api";
 
@@ -27,14 +28,14 @@ export class ApiService {
 
   private getRequestionOptions(): RequestOptionsArgs {
     if (this.token) {
-      let options: RequestOptionsArgs;
-      options.headers.append("Authorization", "Bearer " + this.token);
-      return options;
+      return {
+        headers: new Headers(
+          { "Authorization": "Bearer " + this.token }
+        )
+      };
     }
     else {
       return null;
     }
-
   }
-
 }
