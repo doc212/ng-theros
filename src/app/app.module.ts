@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { WorksIndexComponent } from './works-index/works-index.component';
 import { WorksService } from "app/services/works.service";
+import { ApiService } from "app/services/api.service";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { WorksService } from "app/services/works.service";
   providers: [
     AuthGuard,
     WorksService,
+    ApiService,
     AuthService
   ],
   bootstrap: [AppComponent]

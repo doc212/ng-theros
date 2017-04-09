@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { Http } from "@angular/http";
+import { ApiService } from "app/services/api.service";
 
 const _CURRENT_USER_KEY = "theros.currentUser";
 const storage = sessionStorage;
@@ -20,7 +20,7 @@ export class AuthService {
 
 
   constructor(
-    private http: Http
+    private api : ApiService
   ) {
     var json = storage.getItem(_CURRENT_USER_KEY);
     if (json) {
@@ -29,17 +29,17 @@ export class AuthService {
   }
 
   getUsers(): Promise<User[]> {
-    return this.http.get(API_URL + "/login").map((resp) => resp.json() as User[]).toPromise();
+    return this.api.get("/login").then((resp) => resp.json() as User[]);
 
   }
 
   signIn(userId: number, password: string): Promise<boolean> {
     let _this = this;
     return new Promise<boolean>(function (resolve, reject) {
-      _this.http.post(API_URL + "/login", {
+      _this.api.post("/login", {
         id: userId,
         password: password
-      }).subscribe((resp) => {
+      }).then((resp) => {
         if (resp.ok) {
           _this.currentUser = resp.json().user;
           resolve(true);
