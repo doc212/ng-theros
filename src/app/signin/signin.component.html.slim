@@ -1,8 +1,7 @@
 .container
-    form onsubmit="return false"
-        h2 Please sign in
-        label Your name
-        select.form-control bindon-ngModel="selectedUser" name="user"
-            option *ngFor="let u of users" bind-ngValue="u" bind-disabled="!u" {{u?u.fullname:"Select your name"}}
-        input.form-control ref-inputPassword=true type="password" placeholder="Password" required=true
-        button.btn.btn-lg.btn-primary.btn-block on-click="signIn(inputPassword.value)" Sign in
+    h2 Please sign in
+    label Your name
+    select.form-control bindon-ngModel="selectedUser"
+        option *ngFor="let u of users" bind-ngValue="u" bind-disabled="!u" {{u?u.fullname:"Select your name"}}
+    input.form-control ref-inputPassword=true type="password" placeholder="Password" required=true
+    button.btn.btn-lg.btn-primary.btn-block on-click="signIn(inputPassword.value)" Sign in
