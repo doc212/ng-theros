@@ -59,7 +59,6 @@ export class AuthService {
   }
 
   private handleResponse(response: any, persist = true) {
-    console.log("handleAuthResponse", response);
     if (persist)
       storage.setItem(_CURRENT_USER_KEY, JSON.stringify(response));
     if (response) {
