@@ -5,6 +5,7 @@ import { Work } from "app/models/work";
 import * as _ from "lodash";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import "rxjs/add/operator/debounceTime";
+import "rxjs/add/operator/combineLatest";
 
 @Component({
   selector: 'app-works-index',
@@ -20,13 +21,25 @@ export class WorksIndexComponent implements OnInit {
 
   works: Work[];
   filteredWorks: Work[];
+  private _typeFilter = "";
+  private _typeFilter$ = new BehaviorSubject<string>("");
+  get typeFilter() {
+    return this._typeFilter;
+  }
+  set typeFilter(value) {
+    this._typeFilter = value;
+    this._typeFilter$.next(value);
+  }
 
   private searchTerms$ = new BehaviorSubject<string>("");
 
   ngOnInit() {
     this.searchTerms$
       .debounceTime(200)
-      .subscribe((s) => { this.search(s); });
+      .combineLatest(this._typeFilter$)
+      .subscribe(([s, type]) => {
+        this.search(s, type);
+      });
     this.worksService.getWorks().then(works => {
       this.works = works;
       this.filteredWorks = works;
@@ -37,13 +50,14 @@ export class WorksIndexComponent implements OnInit {
     this.searchTerms$.next(terms);
   }
 
-  private search(terms: string): void {
+  private search(terms: string, type: string): void {
+    let base = !type ? this.works : this.works.filter((w) => w.type == type);
     if (!terms) {
-      this.filteredWorks = this.works;
+      this.filteredWorks = base;
       return;
     }
     let allTerms = this.normalize(terms).split(" ").filter((t) => t !== "");
-    this.filteredWorks = this.works.filter((w) => {
+    this.filteredWorks = base.filter((w) => {
       let all = [
         w.student,
         w.class,
