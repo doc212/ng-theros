@@ -40,7 +40,7 @@ export class WorksIndexComponent implements OnInit {
       this.filteredWorks = this.works;
       return;
     }
-    let allTerms = terms.toLowerCase().split(" ").filter((t) => t !== "");
+    let allTerms = this.normalize(terms).split(" ").filter((t) => t !== "");
     this.filteredWorks = this.works.filter((w) => {
       let all = [
         w.student,
@@ -48,7 +48,8 @@ export class WorksIndexComponent implements OnInit {
         w.type,
         w.subject,
         w.teacher
-      ].join(" ").toLowerCase();
+      ].join(" ");
+      all = this.normalize(all);
       var match = true;
       _.forEach(allTerms, (t) => {
         if (!all.includes(t)) {
@@ -58,6 +59,21 @@ export class WorksIndexComponent implements OnInit {
       })
       return match;
     })
+  }
+
+  private replacements = {
+    "e": /[éèêë]/g,
+    "a": /[àäâ]/g,
+    "i": /[ïî]/g,
+    "o": /[ô]/g,
+    "u": /[ù]/g
+  };
+  private normalize(s: string): string {
+    s = s.toLowerCase();
+    _.each(this.replacements, (value, key) => {
+      s = s.replace(value, key);
+    })
+    return s;
   }
 
 }
