@@ -1,4 +1,6 @@
 .container
+    h2 Encodage de résultats
+    input.form-control ref-terms=true placeholder="Filter by name" on-input="filter(terms.value)"
     table.table
         thead
             tr
@@ -9,11 +11,10 @@
                 th Professeur
                 th Résultat
         tbody
-            tr *ngFor="let work of works"
+            tr *ngFor="let work of filteredWorks"
                 td {{work.student}}
                 td {{work.class}}
                 td {{work.type}}
                 td {{work.subject}}
                 td {{work.teacher}}
                 td {{work.result}}
-
