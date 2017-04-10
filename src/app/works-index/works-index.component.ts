@@ -14,7 +14,7 @@ import "rxjs/add/operator/debounceTime";
 export class WorksIndexComponent implements OnInit {
 
   constructor(
-    public auth : AuthService,
+    public auth: AuthService,
     private worksService: WorksService
   ) { }
 
