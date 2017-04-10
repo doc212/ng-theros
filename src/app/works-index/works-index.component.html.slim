@@ -1,6 +1,8 @@
 .container
-    h2 Encodage de résultats
-    input.form-control ref-terms=true placeholder="Filter by name" on-input="filter(terms.value)"
+    h2 Encodage des résultats
+    h3 Professeur: {{auth.currentUser.fullname}}
+    label Rechercher
+    input.form-control ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
     table.table
         thead
             tr

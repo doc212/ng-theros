@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorksService } from "app/services/works.service";
+import {AuthService} from "app/services/auth.service";
 import { Work } from "app/models/work";
 import * as _ from "lodash";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
@@ -13,6 +14,7 @@ import "rxjs/add/operator/debounceTime";
 export class WorksIndexComponent implements OnInit {
 
   constructor(
+    public auth : AuthService,
     private worksService: WorksService
   ) { }
 
