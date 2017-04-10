@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { WorksService } from "app/services/works.service";
 import { Work } from "app/models/work";
 import * as _ from "lodash";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import "rxjs/add/operator/debounceTime";
 
 @Component({
   selector: 'app-works-index',
@@ -17,7 +19,12 @@ export class WorksIndexComponent implements OnInit {
   works: Work[];
   filteredWorks: Work[];
 
+  private searchTerms$ = new BehaviorSubject<string>("");
+
   ngOnInit() {
+    this.searchTerms$
+      .debounceTime(200)
+      .subscribe((s) => { this.search(s); });
     this.worksService.getWorks().then(works => {
       this.works = works;
       this.filteredWorks = works;
@@ -25,14 +32,15 @@ export class WorksIndexComponent implements OnInit {
   }
 
   filter(terms: string): void {
-    console.log("filtering", terms)
+    this.searchTerms$.next(terms);
+  }
+
+  private search(terms: string): void {
     if (!terms) {
-      console.log("not terms")
       this.filteredWorks = this.works;
       return;
     }
     let allTerms = terms.toLowerCase().split(" ").filter((t) => t !== "");
-    console.log(allTerms);
     this.filteredWorks = this.works.filter((w) => {
       let all = [
         w.student,
