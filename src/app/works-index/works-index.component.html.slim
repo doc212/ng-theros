@@ -6,31 +6,31 @@
     div on-change="refreshFilter()"
         label Type
         .btn-group data-toggle="buttons"
-            label
-                input type="radio" name="type" bindon-ngModel="typeFilter" value=""
+            label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
+                input type="radio" ref-rbTypeAll=true name="type" bindon-ngModel="typeFilter" value=""
                 |Tous
-            label
+            label.btn.btn-primary  bind-ngClass="{active:typeFilter=='TDV'}"
                 input type="radio" name="type" bindon-ngModel="typeFilter" value="TDV"
                 |TDV
-            label
+            label.btn.btn-primary  bind-ngClass="{active:typeFilter=='RAN'}"
                 input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
                 |RAN
         br
         label Résultats
-        .btn-group
-            label
-                input type="checkbox" bindon-ngModel="showOtherResults"
+        .btn-group data-toggle="buttons"
+            label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
+                input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults"
                 |Encodés par quelqu'un d'autre
-            label
-                input type="checkbox" bindon-ngModel="showMyResults"
+            label.btn.btn-primary bind-ngClass="{active:showMyResults}"
+                input type="checkbox" autocomplete="off" bindon-ngModel="showMyResults"
                 |Encodés par moi
-            label
-                input type="checkbox" bindon-ngModel="showWithoutResults"
+            label.btn.btn-primary bind-ngClass="{active:showWithoutResults}"
+                input type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults"
                 |Pas encore encodés
 
 
-    table.table
-        thead
+    table.table.table-striped.table-hover
+        thead.thead-default
             tr
                 th Nom
                 th Classe
