@@ -7,6 +7,8 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/combineLatest";
 
+type RESULT_TYPE = "ALL" | "ME" | "NONE";
+
 @Component({
   selector: 'app-works-index',
   templateUrl: './works-index.component.html.slim',
@@ -31,14 +33,25 @@ export class WorksIndexComponent implements OnInit {
     this._typeFilter$.next(value);
   }
 
+  private _resultFilter: RESULT_TYPE = "ALL";
+  private _resultFilter$ = new BehaviorSubject<RESULT_TYPE>("ALL");
+  get resultFilter() {
+    return this._resultFilter;
+  }
+  set resultFilter(value) {
+    this._resultFilter = value;
+    this._resultFilter$.next(value);
+  }
+
+
   private searchTerms$ = new BehaviorSubject<string>("");
 
   ngOnInit() {
     this.searchTerms$
       .debounceTime(200)
-      .combineLatest(this._typeFilter$)
-      .subscribe(([s, type]) => {
-        this.search(s, type);
+      .combineLatest(this._typeFilter$, this._resultFilter$)
+      .subscribe(([s, type, result]) => {
+        this.search(s, type, result);
       });
     this.worksService.getWorks().then(works => {
       this.works = works;
@@ -50,8 +63,19 @@ export class WorksIndexComponent implements OnInit {
     this.searchTerms$.next(terms);
   }
 
-  private search(terms: string, type: string): void {
-    let base = !type ? this.works : this.works.filter((w) => w.type == type);
+  private search(terms: string, type: string, result: RESULT_TYPE): void {
+    console.log("search", arguments);
+    let base = this.works;
+    if (type || result != "ALL") {
+      base = this.works.filter((w) => {
+        if (type && w.type != type) return false;
+        switch (result) {
+          case "ALL": return true;
+          case "ME": return w.teacher == this.auth.currentUser.fullname;
+          case "NONE": return !w.teacher;
+        }
+      });
+    }
     if (!terms) {
       this.filteredWorks = base;
       return;

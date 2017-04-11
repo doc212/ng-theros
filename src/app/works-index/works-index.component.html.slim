@@ -14,6 +14,19 @@
         label
             input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
             |RAN
+    br
+    label Résultats
+    .btn-group
+        label
+            input type="radio" name="result" bindon-ngModel="resultFilter" value="ALL"
+            |Tous
+        label
+            input type="radio" name="result" bindon-ngModel="resultFilter" value="ME"
+            |Encodés par moi
+        label
+            input type="radio" name="result" bindon-ngModel="resultFilter" value="NONE"
+            |Pas encore encodés
+
 
     table.table
         thead
