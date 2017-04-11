@@ -4,7 +4,7 @@
     label Rechercher
     input.form-control ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
     label Type
-    .btn-group data-toggle="buttons"
+    .btn-group data-toggle="buttons" on-change="refreshFilter()"
         label
             input type="radio" name="type" bindon-ngModel="typeFilter" value=""
             |Tous

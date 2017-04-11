@@ -26,15 +26,7 @@ export class WorksIndexComponent implements OnInit {
   filteredWorks: Work[];
   private _baseFilter$ = new Subject();
 
-  private _typeFilter = "";
-  get typeFilter() {
-    return this._typeFilter;
-  }
-  set typeFilter(value) {
-    this._typeFilter = value;
-    this._baseFilter$.next();
-  }
-
+  typeFilter = "";
   showMyResults = true;
   showOtherResults = false;
   showWithoutResults = true;
