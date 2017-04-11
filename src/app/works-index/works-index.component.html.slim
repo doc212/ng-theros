@@ -1,43 +1,51 @@
 .container *ngIf="filteredWorks"
-    h2 Encodage des résultats
-    h3 Professeur: {{auth.currentUser.fullname}}
-    label Rechercher
-    input.form-control ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
-    div on-change="refreshFilter()"
-        label Type
-        .btn-group data-toggle="buttons"
-            label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
-                input type="radio" ref-rbTypeAll=true name="type" bindon-ngModel="typeFilter" value=""
-                |Tous
-            label.btn.btn-primary  bind-ngClass="{active:typeFilter=='TDV'}"
-                input type="radio" name="type" bindon-ngModel="typeFilter" value="TDV"
-                |TDV
-            label.btn.btn-primary  bind-ngClass="{active:typeFilter=='RAN'}"
-                input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
-                |RAN
-        br
-        label Résultats
-        .btn-group data-toggle="buttons"
-            label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
-                input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults"
-                |Encodés par quelqu'un d'autre
-            label.btn.btn-primary bind-ngClass="{active:showMyResults}"
-                input type="checkbox" autocomplete="off" bindon-ngModel="showMyResults"
-                |Encodés par moi
-            label.btn.btn-primary bind-ngClass="{active:showWithoutResults}"
-                input type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults"
-                |Pas encore encodés
-
-
+    .row
+        .col-sm-12
+            h2 Encodage des résultats
+    .row
+        .col-sm-2.h3 Professeur:
+        .col-sm-10.h3 {{auth.currentUser.fullname}}
+    .row
+        .col-sm-2.col-md-1
+            label Rechercher
+        .col-sm-10.col-md-11
+            input.form-control ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
+    .row on-change="refreshFilter()"
+        .col-sm-1
+            label Type
+        .col-sm-3
+            .btn-group data-toggle="buttons"
+                label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
+                    input type="radio" ref-rbTypeAll=true name="type" bindon-ngModel="typeFilter" value=""
+                    |Tous
+                label.btn.btn-primary  bind-ngClass="{active:typeFilter=='TDV'}"
+                    input type="radio" name="type" bindon-ngModel="typeFilter" value="TDV"
+                    |TDV
+                label.btn.btn-primary  bind-ngClass="{active:typeFilter=='RAN'}"
+                    input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
+                    |RAN
+        .col-sm-3
+            label Résultats encodés par
+        .col-sm-5
+            .btn-group data-toggle="buttons"
+                label.btn.btn-primary bind-ngClass="{active:showMyResults}"
+                    input type="checkbox" autocomplete="off" bindon-ngModel="showMyResults"
+                    |Moi
+                label.btn.btn-primary bind-ngClass="{active:showWithoutResults}"
+                    input type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults"
+                    |Personne
+                label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
+                    input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults"
+                    |Autre
     table.table.table-striped.table-hover
         thead.thead-default
             tr
-                th Nom
-                th Classe
-                th Type
-                th Cours
-                th Professeur
-                th Résultat
+                th.col-xs-3 Nom
+                th.col-xs-1 Classe
+                th.col-xs-1 Type
+                th.col-xs-3 Cours
+                th.col-xs-3 Professeur
+                th.col-xs-1 Résultat
         tbody
             tr *ngFor="let work of filteredWorks"
                 td {{work.student}}
