@@ -37,7 +37,8 @@ export class WorksIndexComponent implements OnInit {
 
   showMyResults = true;
   showOtherResults = false;
-  refreshFilter(){
+  showWithoutResults = true;
+  refreshFilter() {
     this._baseFilter$.next();
   }
 
@@ -66,11 +67,13 @@ export class WorksIndexComponent implements OnInit {
     let type = this.typeFilter;
     let showMyResults = this.showMyResults;
     let showOtherResults = this.showOtherResults;
-    if (type || !showMyResults || !showOtherResults) {
+    let showWithoutResults = this.showWithoutResults;
+    if (type || !showMyResults || !showOtherResults || !showWithoutResults) {
       base = this.works.filter((w) => {
         if (type && w.type != type) return false;
         if (w.teacher == this.auth.currentUser.fullname && !showMyResults) return false;
         if (!showOtherResults && w.teacher && w.teacher != this.auth.currentUser.fullname) return false;
+        if (!showWithoutResults && !w.teacher) return false;
         return true;
       });
     }
