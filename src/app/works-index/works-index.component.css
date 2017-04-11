@@ -1,0 +1,17 @@
+@media(min-width:1200px) {
+  .form-group> :nth-child(odd) {
+    text-align: right;
+  }
+}
+
+@media(max-width:1200px) {
+  .form-group> :nth-child(n+2), .form-group> :nth-child(1) {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-group> :nth-child(odd) {
+    margin-top: 18px;
+  }
+}
