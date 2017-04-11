@@ -16,12 +16,12 @@
             |RAN
     br
     label Résultats
-    .btn-group
+    .btn-group on-change="refreshFilter()"
         label
-            input type="checkbox" bindon-ngModel="showOtherResults" on-change="refreshFilter()"
+            input type="checkbox" bindon-ngModel="showOtherResults"
             |Encodés par quelqu'un d'autre
         label
-            input type="checkbox" bindon-ngModel="showMyResults" on-change="refreshFilter()"
+            input type="checkbox" bindon-ngModel="showMyResults"
             |Encodés par moi
         label
             input type="checkbox" bindon-ngModel="showWithoutResults"
