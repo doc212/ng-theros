@@ -44,6 +44,11 @@ export class WorksIndexComponent implements OnInit {
     this._baseFilter$.next();
   }
 
+  showOtherResults = false;
+  refreshFilter(){
+    this._baseFilter$.next();
+  }
+
 
   private searchTerms$ = new BehaviorSubject<string>("");
 
@@ -56,7 +61,7 @@ export class WorksIndexComponent implements OnInit {
       });
     this.worksService.getWorks().then(works => {
       this.works = works;
-      this.filteredWorks = works;
+      this.refreshFilter();
     });
   }
 
@@ -69,10 +74,12 @@ export class WorksIndexComponent implements OnInit {
     let base = this.works;
     let type = this.typeFilter;
     let showMyResults = this.showMyResults;
-    if (type || !showMyResults) {
+    let showOtherResults = this.showOtherResults;
+    if (type || !showMyResults || !showOtherResults) {
       base = this.works.filter((w) => {
         if (type && w.type != type) return false;
         if (w.teacher == this.auth.currentUser.fullname && !showMyResults) return false;
+        if (!showOtherResults && w.teacher && w.teacher != this.auth.currentUser.fullname) return false;
         return true;
       });
     }

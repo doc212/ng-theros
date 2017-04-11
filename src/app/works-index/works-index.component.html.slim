@@ -18,7 +18,7 @@
     label Résultats
     .btn-group
         label
-            input type="checkbox" bindon-ngModel="showOtherResults"
+            input type="checkbox" bindon-ngModel="showOtherResults" on-change="refreshFilter()"
             |Encodés par quelqu'un d'autre
         label
             input type="checkbox" bindon-ngModel="showMyResults"
