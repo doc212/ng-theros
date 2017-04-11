@@ -54,7 +54,6 @@ export class WorksIndexComponent implements OnInit {
   }
 
   private search(terms: string): void {
-    console.log("search", arguments);
     let base = this.works;
     let type = this.typeFilter;
     let showMyResults = this.showMyResults;
