@@ -4,6 +4,7 @@ import {AuthService} from "app/services/auth.service";
 import { Work } from "app/models/work";
 import * as _ from "lodash";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Subject} from "rxjs/Subject";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/combineLatest";
 
@@ -23,23 +24,24 @@ export class WorksIndexComponent implements OnInit {
 
   works: Work[];
   filteredWorks: Work[];
+  private _baseFilter$ = new Subject();
+
   private _typeFilter = "";
-  private _typeFilter$ = new BehaviorSubject<string>("");
   get typeFilter() {
     return this._typeFilter;
   }
   set typeFilter(value) {
     this._typeFilter = value;
-    this._typeFilter$.next(value);
+    this._baseFilter$.next();
   }
 
-  private _showMyResults: boolean;
-  private _showMyResults$ = new BehaviorSubject<boolean>(true);
+  private _showMyResults = true;
   get showMyResults() {
     return this._showMyResults;
   }
   set showMyResults(value) {
-    this._showMyResults$.next(value);
+    this._showMyResults = value;
+    this._baseFilter$.next();
   }
 
 
@@ -48,9 +50,9 @@ export class WorksIndexComponent implements OnInit {
   ngOnInit() {
     this.searchTerms$
       .debounceTime(200)
-      .combineLatest(this._typeFilter$, this._showMyResults$)
-      .subscribe(([s, type, showMyResults]) => {
-        this.search(s, type, showMyResults);
+      .combineLatest(this._baseFilter$)
+      .subscribe(([s, dummy]) => {
+        this.search(s);
       });
     this.worksService.getWorks().then(works => {
       this.works = works;
@@ -62,10 +64,11 @@ export class WorksIndexComponent implements OnInit {
     this.searchTerms$.next(terms);
   }
 
-  private search(terms: string, type: string, showMyResults: boolean): void {
+  private search(terms: string): void {
     console.log("search", arguments);
-    this._showMyResults = showMyResults;
     let base = this.works;
+    let type = this.typeFilter;
+    let showMyResults = this.showMyResults;
     if (type || !showMyResults) {
       base = this.works.filter((w) => {
         if (type && w.type != type) return false;
