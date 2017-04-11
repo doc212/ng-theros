@@ -1,11 +1,8 @@
 .container *ngIf="filteredWorks"
     .row
         .col-xs-12
-
             h2 Encodage des résultats
-
             h3 Professeur : {{auth.currentUser.fullname}}
-
             form.form-horizontal style="margin-top:20px"
                 .form-group
                     .col-lg-1.col-sm-1.col-xs-2
@@ -38,3 +35,20 @@
                             label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
                                 input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults" bind-ngModelOptions="{standalone:true}"
                                 |Autre
+            table.table.table-striped.table-hover
+                thead.thead-default
+                    tr
+                        th.col-xs-3 Nom
+                        th.col-xs-1 Classe
+                        th.col-xs-1 Type
+                        th.col-xs-3 Cours
+                        th.col-xs-3 Professeur
+                        th.col-xs-1 Résultat
+                tbody
+                    tr *ngFor="let work of filteredWorks"
+                        td {{work.student}}
+                        td {{work.class}}
+                        td {{work.type}}
+                        td {{work.subject}}
+                        td {{work.teacher}}
+                        td {{work.result}}
