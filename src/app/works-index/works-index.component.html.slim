@@ -8,14 +8,13 @@
 
             form.form-horizontal style="margin-top:20px"
                 .form-group
-                    .col-md-1
-                        label.control-label for="terms" Filtrer
-                    .col-md-11 style="position:relative; left:-0em"
-                        input.form-control#terms ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
-                .form-group
+                    .col-lg-1
+                        label.control-label Filtrer
+                    .col-lg-3
+                        input.form-control ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
                     .col-lg-1.col-md-1.col-sm-1
                         label.control-label Type
-                    .col-lg-3.col-md-3.col-sm-4
+                    .col-lg-2.col-md-3.col-sm-4
                         .btn-group data-toggle="buttons"
                             label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
                                 input type="radio" ref-rbTypeAll=true name="type" bindon-ngModel="typeFilter" value=""
