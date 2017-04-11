@@ -18,13 +18,13 @@
     label Résultats
     .btn-group
         label
-            input type="radio" name="result" bindon-ngModel="resultFilter" value="ALL"
-            |Tous
+            input type="checkbox" bindon-ngModel="showOtherResults"
+            |Encodés par quelqu'un d'autre
         label
-            input type="radio" name="result" bindon-ngModel="resultFilter" value="ME"
+            input type="checkbox" bindon-ngModel="showMyResults"
             |Encodés par moi
         label
-            input type="radio" name="result" bindon-ngModel="resultFilter" value="NONE"
+            input type="checkbox" bindon-ngModel="showWithoutResults"
             |Pas encore encodés
 
 

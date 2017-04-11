@@ -33,14 +33,13 @@ export class WorksIndexComponent implements OnInit {
     this._typeFilter$.next(value);
   }
 
-  private _resultFilter: RESULT_TYPE = "ALL";
-  private _resultFilter$ = new BehaviorSubject<RESULT_TYPE>("ALL");
-  get resultFilter() {
-    return this._resultFilter;
+  private _showMyResults: boolean;
+  private _showMyResults$ = new BehaviorSubject<boolean>(true);
+  get showMyResults() {
+    return this._showMyResults;
   }
-  set resultFilter(value) {
-    this._resultFilter = value;
-    this._resultFilter$.next(value);
+  set showMyResults(value) {
+    this._showMyResults$.next(value);
   }
 
 
@@ -49,9 +48,9 @@ export class WorksIndexComponent implements OnInit {
   ngOnInit() {
     this.searchTerms$
       .debounceTime(200)
-      .combineLatest(this._typeFilter$, this._resultFilter$)
-      .subscribe(([s, type, result]) => {
-        this.search(s, type, result);
+      .combineLatest(this._typeFilter$, this._showMyResults$)
+      .subscribe(([s, type, showMyResults]) => {
+        this.search(s, type, showMyResults);
       });
     this.worksService.getWorks().then(works => {
       this.works = works;
@@ -63,17 +62,15 @@ export class WorksIndexComponent implements OnInit {
     this.searchTerms$.next(terms);
   }
 
-  private search(terms: string, type: string, result: RESULT_TYPE): void {
+  private search(terms: string, type: string, showMyResults: boolean): void {
     console.log("search", arguments);
+    this._showMyResults = showMyResults;
     let base = this.works;
-    if (type || result != "ALL") {
+    if (type || !showMyResults) {
       base = this.works.filter((w) => {
         if (type && w.type != type) return false;
-        switch (result) {
-          case "ALL": return true;
-          case "ME": return w.teacher == this.auth.currentUser.fullname;
-          case "NONE": return !w.teacher;
-        }
+        if (w.teacher == this.auth.currentUser.fullname && !showMyResults) return false;
+        return true;
       });
     }
     if (!terms) {
