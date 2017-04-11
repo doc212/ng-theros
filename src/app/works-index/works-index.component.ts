@@ -35,20 +35,11 @@ export class WorksIndexComponent implements OnInit {
     this._baseFilter$.next();
   }
 
-  private _showMyResults = true;
-  get showMyResults() {
-    return this._showMyResults;
-  }
-  set showMyResults(value) {
-    this._showMyResults = value;
-    this._baseFilter$.next();
-  }
-
+  showMyResults = true;
   showOtherResults = false;
   refreshFilter(){
     this._baseFilter$.next();
   }
-
 
   private searchTerms$ = new BehaviorSubject<string>("");
 
