@@ -1,56 +1,41 @@
 .container *ngIf="filteredWorks"
     .row
-        .col-sm-12
+        .col-xs-12
+
             h2 Encodage des résultats
-    .row
-        .col-sm-2.h3 Professeur:
-        .col-sm-10.h3 {{auth.currentUser.fullname}}
-    .row
-        .col-sm-2.col-md-1
-            label Rechercher
-        .col-sm-10.col-md-11
-            input.form-control ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
-    .row on-change="refreshFilter()"
-        .col-sm-1
-            label Type
-        .col-sm-3
-            .btn-group data-toggle="buttons"
-                label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
-                    input type="radio" ref-rbTypeAll=true name="type" bindon-ngModel="typeFilter" value=""
-                    |Tous
-                label.btn.btn-primary  bind-ngClass="{active:typeFilter=='TDV'}"
-                    input type="radio" name="type" bindon-ngModel="typeFilter" value="TDV"
-                    |TDV
-                label.btn.btn-primary  bind-ngClass="{active:typeFilter=='RAN'}"
-                    input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
-                    |RAN
-        .col-sm-3
-            label Résultats encodés par
-        .col-sm-5
-            .btn-group data-toggle="buttons"
-                label.btn.btn-primary bind-ngClass="{active:showMyResults}"
-                    input type="checkbox" autocomplete="off" bindon-ngModel="showMyResults"
-                    |Moi
-                label.btn.btn-primary bind-ngClass="{active:showWithoutResults}"
-                    input type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults"
-                    |Personne
-                label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
-                    input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults"
-                    |Autre
-    table.table.table-striped.table-hover
-        thead.thead-default
-            tr
-                th.col-xs-3 Nom
-                th.col-xs-1 Classe
-                th.col-xs-1 Type
-                th.col-xs-3 Cours
-                th.col-xs-3 Professeur
-                th.col-xs-1 Résultat
-        tbody
-            tr *ngFor="let work of filteredWorks"
-                td {{work.student}}
-                td {{work.class}}
-                td {{work.type}}
-                td {{work.subject}}
-                td {{work.teacher}}
-                td {{work.result}}
+
+            h3 Professeur : {{auth.currentUser.fullname}}
+
+            form.form-horizontal style="margin-top:20px"
+                .form-group
+                    .col-md-1
+                        label.control-label for="terms" Filtrer
+                    .col-md-11 style="position:relative; left:-0em"
+                        input.form-control#terms ref-terms=true placeholder="par nom, classe, cours, type, professeur" on-input="filter(terms.value)"
+                .form-group
+                    .col-lg-1.col-md-1.col-sm-1
+                        label.control-label Type
+                    .col-lg-3.col-md-3.col-sm-4
+                        .btn-group data-toggle="buttons"
+                            label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
+                                input type="radio" ref-rbTypeAll=true name="type" bindon-ngModel="typeFilter" value=""
+                                |Tous
+                            label.btn.btn-primary  bind-ngClass="{active:typeFilter=='TDV'}"
+                                input type="radio" name="type" bindon-ngModel="typeFilter" value="TDV"
+                                |TDV
+                            label.btn.btn-primary  bind-ngClass="{active:typeFilter=='RAN'}"
+                                input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
+                                |RAN
+                    .col-lg-2.col-md-2.col-sm-2
+                        label.control-label Encodé par
+                    .col-lg-3.col-md-6.col-sm-5
+                        .btn-group data-toggle="buttons"
+                            label.btn.btn-primary bind-ngClass="{active:showMyResults}"
+                                input type="checkbox" autocomplete="off" bindon-ngModel="showMyResults" bind-ngModelOptions="{standalone:true}"
+                                |Moi
+                            label.btn.btn-primary bind-ngClass="{active:showWithoutResults}"
+                                input type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults" bind-ngModelOptions="{standalone:true}"
+                                |Personne
+                            label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
+                                input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults" bind-ngModelOptions="{standalone:true}"
+                                |Autre
