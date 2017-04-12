@@ -35,6 +35,7 @@
                             label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
                                 input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults" bind-ngModelOptions="{standalone:true}"
                                 |Autre
+            div {{filteredWorks.length}} travaux affichés sur {{works.length}}
             table.table.table-striped.table-hover
                 thead.thead-default
                     tr
