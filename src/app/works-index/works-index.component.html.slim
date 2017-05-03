@@ -43,8 +43,9 @@
                         th.col-xs-1 Classe
                         th.col-xs-1 Type
                         th.col-xs-3 Cours
-                        th.col-xs-3 Professeur
+                        th.col-xs-2 Professeur
                         th.col-xs-1 Résultat
+                        th.col-xs-2
                 tbody
                     tr *ngFor="let work of filteredWorks"
                         td {{work.student}}
@@ -53,3 +54,10 @@
                         td {{work.subject}}
                         td {{work.teacher}}
                         td {{work.result}}
+                        td.btn-group
+                            button.btn.btn-primary *ngIf="work.teacher == auth.currentUser.fullname"
+                                span.glyphicon.glyphicon-edit
+                            button.btn.btn-danger *ngIf="work.teacher == auth.currentUser.fullname"
+                                span.glyphicon.glyphicon-remove
+                            button.btn.btn-primary *ngIf="!work.teacher"
+                                span.glyphicon.glyphicon-plus
