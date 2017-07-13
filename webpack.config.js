@@ -44,6 +44,7 @@ module.exports = {
     ],
     "styles": [
       "./src/styles.css",
+      "./node_modules/sweetalert2/dist/sweetalert2.min.css",
       "./node_modules/bootstrap/dist/css/bootstrap.min.css"
     ]
   },
@@ -89,6 +90,7 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.css$/,
@@ -101,6 +103,7 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.scss$|\.sass$/,
@@ -114,6 +117,7 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.less$/,
@@ -127,6 +131,7 @@ module.exports = {
       {
         "exclude": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.styl$/,
@@ -140,6 +145,7 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.css$/,
@@ -155,6 +161,7 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.scss$|\.sass$/,
@@ -171,6 +178,7 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.less$/,
@@ -187,6 +195,7 @@ module.exports = {
       {
         "include": [
           path.join(process.cwd(), "src/styles.css"),
+          path.join(process.cwd(), "node_modules/sweetalert2/dist/sweetalert2.min.css"),
           path.join(process.cwd(), "node_modules/bootstrap/dist/css/bootstrap.min.css")
         ],
         "test": /\.styl$/,

@@ -7,10 +7,12 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Subject} from "rxjs/Subject";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/combineLatest";
+import {SweetAlertService} from "ng2-sweetalert2";
 
 type RESULT_TYPE = "ALL" | "ME" | "NONE";
 
 @Component({
+  providers: [SweetAlertService],
   selector: 'app-works-index',
   templateUrl: './works-index.component.html.slim',
   styleUrls: ['./works-index.component.css']
@@ -18,6 +20,7 @@ type RESULT_TYPE = "ALL" | "ME" | "NONE";
 export class WorksIndexComponent implements OnInit {
 
   constructor(
+    private swal: SweetAlertService,
     public auth: AuthService,
     private worksService: WorksService
   ) { }
@@ -106,6 +109,27 @@ export class WorksIndexComponent implements OnInit {
       s = s.replace(value, key);
     })
     return s;
+  }
+
+  delete(work: Work): void {
+    console.log(this.swal);
+    let swal = this.swal.swal;
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(function() {
+      swal(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    })
+
   }
 
 }

@@ -57,7 +57,7 @@
                         td.btn-group
                             button.btn.btn-primary *ngIf="work.teacher == auth.currentUser.fullname"
                                 span.glyphicon.glyphicon-edit
-                            button.btn.btn-danger *ngIf="work.teacher == auth.currentUser.fullname"
+                            button.btn.btn-danger *ngIf="work.teacher == auth.currentUser.fullname" on-click="delete(work)"
                                 span.glyphicon.glyphicon-remove
                             button.btn.btn-primary *ngIf="!work.teacher"
                                 span.glyphicon.glyphicon-plus
