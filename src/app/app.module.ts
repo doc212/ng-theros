@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { WorksIndexComponent } from './works-index/works-index.component';
 import { WorksService } from "app/services/works.service";
 import { ApiService } from "app/services/api.service";
+import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ApiService } from "app/services/api.service";
     SigninComponent,
     NotFoundComponent,
     HomeComponent,
-    WorksIndexComponent
+    WorksIndexComponent,
+    AdminTeachersComponent
   ],
   imports: [
     BrowserModule,
