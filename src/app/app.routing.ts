@@ -5,8 +5,10 @@ import {HomeComponent} from './home/home.component';
 import { AuthGuard } from './services/auth.guard';
 import { WorksIndexComponent } from "app/works-index/works-index.component";
 import {AdminTeachersComponent} from 'app/admin-teachers/admin-teachers.component';
+import {AdminTeacherPasswordComponent} from 'app/admin-teacher-password/admin-teacher-password.component';
 
 const app_routes: Routes = [
+  { path: 'admin/teachers/:id', component: AdminTeacherPasswordComponent, canActivate: [AuthGuard] },
   { path: 'admin/teachers', component: AdminTeachersComponent, canActivate: [AuthGuard] },
   { path: 'works', component: WorksIndexComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent },
