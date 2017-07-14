@@ -6,7 +6,11 @@
                 tr
                     th Nom
                     th Admin
+                    th
                 tr *ngFor="let u of users"
                     td {{u.fullname}}
                     td
                         input type="checkbox" bindon-ngModel="u.admin" on-change="changeAdmin(u)"
+                    td
+                        button.btn.btn-primary on-click="editUser(u)"
+                            span.glyphicon.glyphicon-edit
