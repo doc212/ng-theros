@@ -22,6 +22,7 @@ export class AdminTeachersComponent implements OnInit {
 
   changeAdmin(user: User): void {
     console.log("%s is admin? %s", user.fullname, user.admin);
+    this.userService.updateUser(user);
   }
 
   editUser(user: User): void {

@@ -21,10 +21,8 @@ export class UserService {
     // return this.api.get("/user/" + id).then(resp => resp.json() as User);
   }
 
-  resetPassword(password: string, id: number) {
-    console.log("new password: %s for user %s", password, id);
-    this.api.put("/user",{
-      id:id, password:password
-    });
+  updateUser(user:User) {
+    console.log("updating user", user);
+    this.api.put("/user",user);
   }
 }

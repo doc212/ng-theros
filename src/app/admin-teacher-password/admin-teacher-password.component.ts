@@ -31,6 +31,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   }
 
   resetPassword(password: string): void {
-    this.userService.resetPassword(password, this.user.id);
+    this.user.password = password;
+    this.userService.updateUser(this.user);
   }
 }
