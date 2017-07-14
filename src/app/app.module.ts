@@ -16,7 +16,7 @@ import { WorksIndexComponent } from './works-index/works-index.component';
 import { WorksService } from "app/services/works.service";
 import { ApiService } from "app/services/api.service";
 import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
-import { UserService } from './user.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
