@@ -1,0 +1,11 @@
+.container
+    .row
+        .col-xs-12
+            h2 Professeurs
+            table.table.table-striped.table-hover
+                tr
+                    th id
+                    th Nom
+                tr *ngFor="let u of users"
+                    td {{u.id}}
+                    td {{u.fullname}}

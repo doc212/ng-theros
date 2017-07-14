@@ -4,7 +4,6 @@ import { ApiService } from "app/services/api.service";
 
 const _CURRENT_USER_KEY = "theros.currentUser";
 const storage = sessionStorage;
-const API_URL = "http://localhost/~doc212/theros/app_dev.php/api";
 
 @Injectable()
 export class AuthService {
@@ -21,11 +20,6 @@ export class AuthService {
   loadFromStorage() {
     var json = storage.getItem(_CURRENT_USER_KEY);
     this.handleResponse(JSON.parse(json), false);
-  }
-
-  getUsers(): Promise<User[]> {
-    return this.api.get("/login").then((resp) => resp.json() as User[]);
-
   }
 
   signIn(userId: number, password: string): Promise<boolean> {
