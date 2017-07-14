@@ -8,4 +8,5 @@
                     th Admin
                 tr *ngFor="let u of users"
                     td {{u.fullname}}
-                    td {{u.admin ? "Admin" : ""}}
+                    td
+                        input type="checkbox" bindon-ngModel="u.admin" on-change="changeAdmin(u)"
