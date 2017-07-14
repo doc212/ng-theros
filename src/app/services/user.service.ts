@@ -14,11 +14,7 @@ export class UserService {
   }
 
   getUser(id: number): Promise<User> {
-    return Promise.resolve({
-      id: id,
-      fullname: "Some user"
-    });
-    // return this.api.get("/user/" + id).then(resp => resp.json() as User);
+    return this.api.get("/user/" + id).then(resp => resp.json() as User);
   }
 
   updateUser(user:User) {
