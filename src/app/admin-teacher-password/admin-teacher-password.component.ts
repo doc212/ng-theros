@@ -13,6 +13,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   private id: number;
   private sub: Subscription;
   user: User;
+  busy = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +32,8 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   }
 
   resetPassword(password: string): void {
+    this.busy = true;
     this.user.password = password;
-    this.userService.updateUser(this.user);
+    this.userService.updateUser(this.user).then(() => this.busy = false);
   }
 }

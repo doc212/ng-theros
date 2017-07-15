@@ -19,10 +19,10 @@ export class UserService {
     return this.api.get("/user/" + id).then(resp => resp.json() as User);
   }
 
-  updateUser(user: User) {
+  updateUser(user: User) : Promise<void> {
     console.log("updating user", user);
     let _this = this;
-    this.api.put("/user", user).then(resp => {
+    return this.api.put("/user", user).then(resp => {
       if (resp.status == 200) {
         let body = resp.json();
         _this.auth.updateToken(body.newToken);
