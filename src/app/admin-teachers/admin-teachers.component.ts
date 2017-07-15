@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {Router} from '@angular/router';
+import {AuthService} from 'app/services/auth.service';
 
 @Component({
   selector: 'app-admin-teachers',
@@ -12,6 +13,7 @@ export class AdminTeachersComponent implements OnInit {
 
   users: User[];
   constructor(
+    public auth: AuthService,
     private router: Router,
     private userService: UserService
   ) { }

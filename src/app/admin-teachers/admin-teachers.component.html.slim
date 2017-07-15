@@ -10,7 +10,7 @@
                 tr *ngFor="let u of users"
                     td {{u.fullname}}
                     td
-                        input type="checkbox" bindon-ngModel="u.admin" on-change="changeAdmin(u)"
+                        input type="checkbox" bindon-ngModel="u.admin" on-change="changeAdmin(u)" bind-disabled="u.id == auth.currentUser.id"
                     td
                         button.btn.btn-primary on-click="editUser(u)"
                             span.glyphicon.glyphicon-edit
