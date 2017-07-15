@@ -4,9 +4,9 @@
             h2 Professeurs
             table.table.table-striped.table-hover
                 tr
-                    th Nom
-                    th Admin
-                    th
+                    th.col-xs-10 Nom
+                    th.col-xs-1 Admin
+                    th.col-xs-1
                 tr *ngFor="let u of users"
                     td {{u.fullname}}
                     td
