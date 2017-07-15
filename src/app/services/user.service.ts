@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {User} from '../models/user';
 import {ApiService} from './api.service';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class UserService {
 
   constructor(
+    private auth: AuthService,
     private api: ApiService
   ) { }
 
@@ -17,8 +19,14 @@ export class UserService {
     return this.api.get("/user/" + id).then(resp => resp.json() as User);
   }
 
-  updateUser(user:User) {
+  updateUser(user: User) {
     console.log("updating user", user);
-    this.api.put("/user",user);
+    let _this = this;
+    this.api.put("/user", user).then(resp => {
+      if (resp.status == 200) {
+        let body = resp.json();
+        _this.auth.updateToken(body.newToken);
+      }
+    });
   }
 }
