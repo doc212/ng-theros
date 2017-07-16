@@ -16,6 +16,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   user: User;
   busy = false;
+  teachings: any[];
 
   constructor(
     private location: Location,
