@@ -37,13 +37,13 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
         this.user = user;
         this.teachings =
           from(user.teachings)
-          .groupBy(t => t.subject.id)
-          .select(g => {
-            return {
-              subject: g.first().subject as Subject,
-              classes: g.select(t=>t.class).toArray() as Klass[]
-            }
-          }).toArray();
+            .groupBy(t => t.subject.id, t => t)
+            .select(g => {
+              return {
+                subject: g.first().subject,
+                classes: g.select(t => t.class).toArray()
+              }
+            }).toArray();
       });
     })
   }
