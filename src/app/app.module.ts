@@ -19,6 +19,9 @@ import { AdminTeachersComponent } from './admin-teachers/admin-teachers.componen
 import { UserService } from './services/user.service';
 import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-teacher-password.component';
 
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +36,8 @@ import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-te
     BrowserModule,
     FormsModule,
     app_routing,
+    ModalModule.forRoot(),
+    BootstrapModalModule,
     RouterModule,
     HttpModule
   ],
