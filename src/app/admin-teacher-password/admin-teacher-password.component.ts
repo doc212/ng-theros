@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {UserService} from 'app/services/user.service';
@@ -10,7 +10,9 @@ import {Teaching} from 'app/models/teaching';
 import {Subject} from 'app/models/subject';
 import {Klass} from 'app/models/klass';
 import {from} from 'linq';
-import { Modal } from 'angular2-modal/plugins/bootstrap'
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { overlayConfigFactory } from "angular2-modal";
+
 
 @Component({
   selector: 'app-admin-teacher-password',
@@ -26,7 +28,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   teachings: { subject: Subject, classes: Klass[] }[];
 
   constructor(
-    private modal : Modal,
+    private modal: Modal,
     private location: Location,
     private route: ActivatedRoute,
     private userService: UserService
@@ -84,5 +86,10 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
                     <li>HTML content</li>
                 </ul>`)
       .open();
+  }
+
+  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
+  editClick2(): void {
+    this.modal.open(this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
   }
 }
