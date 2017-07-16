@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {UserService} from 'app/services/user.service';
 import {User} from 'app/models/user';
 import {RouteNames} from 'app/app.routing';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-admin-teacher-password',
@@ -17,7 +18,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   busy = false;
 
   constructor(
-    private router: Router,
+    private location: Location,
     private route: ActivatedRoute,
     private userService: UserService
   ) { }
@@ -38,7 +39,11 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
     this.user.password = password;
     this.userService.updateUser(this.user).then(() => {
       this.busy = false;
-      this.router.navigate([RouteNames.admin_teachers]);
+      this.location.back();
     });
+  }
+
+  clickCancel(): void {
+    this.location.back();
   }
 }
