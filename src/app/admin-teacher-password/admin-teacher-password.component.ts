@@ -33,7 +33,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
       let id = +params["id"];
       this.userService.getUser(id).then(user => {
         this.user = user;
-        let teachings: Teaching[] = (<any>user).teachings;
+        let teachings: Teaching[] = user.teachings;
         let bySubjectId = _.groupBy(teachings, t => t.subject.id);
         this.teachings = _.map(bySubjectId, teachings => {
           return {
