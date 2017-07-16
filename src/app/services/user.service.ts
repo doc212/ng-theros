@@ -9,6 +9,12 @@ class UserWithTeachings extends User {
   teachings: Teaching[];
 }
 
+class UserClasseInfo {
+  class: Klass;
+  assigned: boolean;
+  works: number;
+}
+
 @Injectable()
 export class UserService {
 
@@ -36,29 +42,7 @@ export class UserService {
     });
   }
 
-  getUserClasses(userId: number, subjectId: number): Promise<{ class: Klass, assigned: boolean, works: number }[]> {
-    let currentClasses: { class: Klass, assigned: boolean, works: number }[] = [
-      {
-        class: { id: 1, code: "1CA" },
-        assigned: true,
-        works: 0
-      },
-      {
-        class: { id: 2, code: "1CB" },
-        assigned: true,
-        works: 5
-      },
-      {
-        class: { id: 3, code: "1CC" },
-        assigned: false,
-        works: 0
-      },
-      {
-        class: { id: 4, code: "2CC" },
-        assigned: false,
-        works: 0
-      }
-    ];
-    return Promise.resolve(currentClasses);
+  getUserClasses(userId: number, subjectId: number): Promise<UserClasseInfo[]> {
+    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId }).then(response => response.json() as UserClasseInfo[])
   }
 }

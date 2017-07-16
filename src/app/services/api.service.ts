@@ -14,8 +14,13 @@ export class ApiService {
 
   token: string;
 
-  get(url: string): Promise<Response> {
-    return this.http.get(this.getUrl(url), this.getRequestionOptions()).toPromise();
+  get(url: string, params: { [detais: string]: any } = null): Promise<Response> {
+    let options = this.getRequestionOptions();
+    if (params) {
+      options = options || {};
+      options.params = params;
+    }
+    return this.http.get(this.getUrl(url), options).toPromise();
   }
 
   post(url: string, data: any): Promise<Response> {

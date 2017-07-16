@@ -101,10 +101,9 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
           .select(g => {
             return {
               level: g.key(),
-              classes: g.toArray()
+              classes: g.orderBy(c => c.class.code).toArray()
             };
           }).toArray();
-      console.log(_this.currentClasses);
     });
     this.modal.open(this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
   }
