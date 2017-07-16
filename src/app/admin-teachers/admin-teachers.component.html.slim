@@ -4,8 +4,9 @@
             h2 Professeurs
             table.table.table-striped.table-hover
                 tr
-                    th id
                     th Nom
+                    th Admin
                 tr *ngFor="let u of users"
-                    td {{u.id}}
                     td {{u.fullname}}
+                    td
+                        input type="checkbox" bindon-ngModel="u.admin" on-change="changeAdmin(u)"

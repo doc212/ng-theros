@@ -18,4 +18,9 @@ export class AdminTeachersComponent implements OnInit {
     this.userService.getUsers().then(users => this.users = users);
   }
 
+  changeAdmin(user:User) : void
+  {
+    console.log("%s is admin? %s", user.fullname, user.admin);
+  }
+
 }
