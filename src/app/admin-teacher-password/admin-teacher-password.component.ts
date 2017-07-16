@@ -9,6 +9,8 @@ import * as _ from "lodash";
 import {Teaching} from 'app/models/teaching';
 import {Subject} from 'app/models/subject';
 import {Klass} from 'app/models/klass';
+import {from} from 'linq';
+
 
 @Component({
   selector: 'app-admin-teacher-password',
@@ -33,14 +35,15 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
       let id = +params["id"];
       this.userService.getUser(id).then(user => {
         this.user = user;
-        let teachings: Teaching[] = user.teachings;
-        let bySubjectId = _.groupBy(teachings, t => t.subject.id);
-        this.teachings = _.map(bySubjectId, teachings => {
-          return {
-            subject: teachings[0].subject,
-            classes: _.map(teachings, t => t.class)
-          };
-        })
+        this.teachings =
+          from(user.teachings)
+          .groupBy(t => t.subject.id)
+          .select(g => {
+            return {
+              subject: g.first().subject as Subject,
+              classes: g.select(t=>t.class).toArray() as Klass[]
+            }
+          }).toArray();
       });
     })
   }
