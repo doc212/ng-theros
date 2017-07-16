@@ -8,7 +8,7 @@ import {Location} from '@angular/common';
 import * as _ from "lodash";
 import {Teaching} from 'app/models/teaching';
 import {Subject} from 'app/models/subject';
-import {Klass} from 'app/models/klass';
+import {Klass, UserClassInfo} from 'app/models/klass';
 import {from} from 'linq';
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
 import { overlayConfigFactory } from "angular2-modal";
@@ -90,7 +90,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
 
   @ViewChild('templateRef') public templateRef: TemplateRef<any>;
   currentSubject: Subject;
-  currentClasses: Array<{ level: string; classes: Array<{ class: Klass, assigned: boolean, works: number }> }>;
+  currentClasses: Array<{ level: string; classes: UserClassInfo[] }>;
   editClick2(subject: Subject): void {
     this.currentSubject = subject;
     let _this = this;
@@ -104,7 +104,11 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
               classes: g.orderBy(c => c.class.code).toArray()
             };
           }).toArray();
+      _this.modal.open(_this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
     });
-    this.modal.open(this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
+  }
+
+  updateClassInfo(info: UserClassInfo): void {
+    this.userService.updateClassInfo(this.user.id, this.currentSubject.id, info.class.id, info.assigned)
   }
 }

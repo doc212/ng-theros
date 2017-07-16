@@ -3,17 +3,13 @@ import {User} from '../models/user';
 import {ApiService} from './api.service';
 import {AuthService} from './auth.service';
 import {Teaching} from 'app/models/teaching';
-import {Klass} from 'app/models/klass';
+import {Klass, UserClassInfo} from 'app/models/klass';
 
 class UserWithTeachings extends User {
   teachings: Teaching[];
 }
 
-class UserClasseInfo {
-  class: Klass;
-  assigned: boolean;
-  works: number;
-}
+
 
 @Injectable()
 export class UserService {
@@ -42,7 +38,13 @@ export class UserService {
     });
   }
 
-  getUserClasses(userId: number, subjectId: number): Promise<UserClasseInfo[]> {
-    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId }).then(response => response.json() as UserClasseInfo[])
+  getUserClasses(userId: number, subjectId: number): Promise<UserClassInfo[]> {
+    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId }).then(response => response.json() as UserClassInfo[])
+  }
+
+  updateClassInfo(userId: number, subjectId: number, classId: number, assigned: boolean): void {
+    this.api.put("/user_classes", {
+      userId: userId, classId: classId, assigned: assigned, subjectId: subjectId
+    })
   }
 }
