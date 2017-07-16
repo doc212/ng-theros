@@ -89,7 +89,23 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   }
 
   @ViewChild('templateRef') public templateRef: TemplateRef<any>;
-  editClick2(): void {
+  currentSubject: Subject;
+  currentClasses: Array<{ level: string; classes: Array<{ class: Klass, assigned: boolean, works: number }> }>;
+  editClick2(subject: Subject): void {
+    this.currentSubject = subject;
+    let _this = this;
+    this.userService.getUserClasses(this.user.id, subject.id).then(currentClasses => {
+      _this.currentClasses =
+        from(currentClasses)
+          .groupBy(c => c.class.code[0], c => c)
+          .select(g => {
+            return {
+              level: g.key(),
+              classes: g.toArray()
+            };
+          }).toArray();
+      console.log(_this.currentClasses);
+    });
     this.modal.open(this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
   }
 }
