@@ -24,7 +24,7 @@ export class AuthService {
 
   signIn(userId: number, password: string): Promise<boolean> {
     let _this = this;
-    return new Promise<boolean>(function (resolve, reject) {
+    return new Promise<boolean>(function(resolve, reject) {
       _this.api.post("/login", {
         id: userId,
         password: password
@@ -63,6 +63,15 @@ export class AuthService {
       this._currentUser = null;
       this.api.token = null;
     }
+  }
 
+  updateToken(token: string): void {
+    if (!token)
+      throw new Error("token cannot be empty");
+    this.api.token = token;
+    storage.setItem(_CURRENT_USER_KEY, JSON.stringify({
+      user: this._currentUser,
+      token: token
+    }));
   }
 }

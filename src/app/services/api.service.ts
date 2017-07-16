@@ -22,6 +22,10 @@ export class ApiService {
     return this.http.post(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
   }
 
+  put(url: string, data: any): Promise<Response> {
+    return this.http.put(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
+  }
+
   private getUrl(url: string): string {
     return API_URL + url;
   }

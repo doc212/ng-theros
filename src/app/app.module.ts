@@ -17,6 +17,7 @@ import { WorksService } from "app/services/works.service";
 import { ApiService } from "app/services/api.service";
 import { AdminTeachersComponent } from './admin-teachers/admin-teachers.component';
 import { UserService } from './services/user.service';
+import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-teacher-password.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserService } from './services/user.service';
     NotFoundComponent,
     HomeComponent,
     WorksIndexComponent,
-    AdminTeachersComponent
+    AdminTeachersComponent,
+    AdminTeacherPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+table tr td {
+  vertical-align: middle;
+}
+
+table tr *:nth-child(2){
+  text-align: center;
+}
+
+.btn span.glyphicon.glyphicon-ok {
+	opacity: 0;
+}
+
+.btn.active span.glyphicon.glyphicon-ok {
+	opacity: 1;
+}
