@@ -20,6 +20,7 @@ import { UserService } from './services/user.service';
 import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-teacher-password.component';
 
 import { ModalModule } from 'ngx-bootstrap';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ModalModule } from 'ngx-bootstrap';
     BrowserModule,
     FormsModule,
     app_routing,
+    ButtonsModule.forRoot(),
     ModalModule.forRoot(),
     RouterModule,
     HttpModule
