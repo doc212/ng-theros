@@ -5,6 +5,12 @@ import {UserService} from 'app/services/user.service';
 import {User} from 'app/models/user';
 import {RouteNames} from 'app/app.routing';
 import {Location} from '@angular/common';
+import * as _ from "lodash";
+import {Teaching} from 'app/models/teaching';
+import {Subject} from 'app/models/subject';
+import {Klass} from 'app/models/klass';
+import {from} from 'linq';
+
 
 @Component({
   selector: 'app-admin-teacher-password',
@@ -16,6 +22,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   user: User;
   busy = false;
+  teachings: { subject: Subject, classes: Klass[] }[];
 
   constructor(
     private location: Location,
@@ -26,7 +33,18 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       let id = +params["id"];
-      this.userService.getUser(id).then(user => this.user = user);
+      this.userService.getUser(id).then(user => {
+        this.user = user;
+        this.teachings =
+          from(user.teachings)
+            .groupBy(t => t.subject.id, t => t)
+            .select(g => {
+              return {
+                subject: g.first().subject,
+                classes: g.select(t => t.class).toArray()
+              }
+            }).toArray();
+      });
     })
   }
 

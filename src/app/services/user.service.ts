@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import {User} from '../models/user';
 import {ApiService} from './api.service';
 import {AuthService} from './auth.service';
+import {Teaching} from 'app/models/teaching';
+
+class UserWithTeachings extends User {
+  teachings:Teaching[];
+}
 
 @Injectable()
 export class UserService {
@@ -15,8 +20,8 @@ export class UserService {
     return this.api.get("/login").then((resp) => resp.json() as User[]);
   }
 
-  getUser(id: number): Promise<User> {
-    return this.api.get("/user/" + id).then(resp => resp.json() as User);
+  getUser(id: number): Promise<UserWithTeachings> {
+    return this.api.get("/user/" + id).then(resp => resp.json() as UserWithTeachings);
   }
 
   updateUser(user: User) : Promise<void> {
