@@ -75,7 +75,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
 
   @ViewChild("childModal") public childModal: ModalDirective;
   currentSubject: Subject;
-  currentClasses: Array<{ level: string; classes: UserClassInfo[] }>;
+  currentClasses: Level[];
   editClick2(subject: Subject): void {
     this.currentSubject = subject;
     let _this = this;
@@ -96,4 +96,24 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   updateClassInfo(info: UserClassInfo): void {
     this.userService.updateClassInfo(this.user.id, this.currentSubject.id, info.class.id, info.assigned)
   }
+
+  selectAll(level: Level): void {
+    level.classes.forEach( c=>{
+      c.assigned = true;
+      this.updateClassInfo(c);
+    });
+  }
+
+  unselectAll(level: Level): void {
+    level.classes.forEach( c=>{
+      if(c.works == 0)
+        c.assigned = false;
+        this.updateClassInfo(c);
+    });
+  }
+}
+
+class Level {
+  level: string;
+  classes: UserClassInfo[];
 }
