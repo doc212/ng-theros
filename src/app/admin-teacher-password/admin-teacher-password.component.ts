@@ -50,7 +50,7 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
           .select(g => {
             return {
               subject: g.first().subject,
-              classes: g.select(t => t.class).toArray()
+              classes: g.select(t => t.class).orderBy(c => c.code).toArray()
             }
           }).toArray();
     });
