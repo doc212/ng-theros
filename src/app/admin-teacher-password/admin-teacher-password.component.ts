@@ -121,6 +121,16 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
       this.updateClassInfo(c);
     });
   }
+
+  popoverText = "Cannot remove";
+  getPopoverTriggers(c: UserClassInfo) {
+    if (c.works > 0) {
+      return "mouseenter:mouseleave";
+    } else {
+      return "";
+    }
+
+  }
 }
 
 class Level {

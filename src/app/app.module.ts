@@ -21,6 +21,7 @@ import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-te
 
 import { ModalModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     app_routing,
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
+    PopoverModule.forRoot(),
     RouterModule,
     HttpModule
   ],
