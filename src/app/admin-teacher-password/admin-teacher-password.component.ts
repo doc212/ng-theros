@@ -98,17 +98,17 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
   }
 
   selectAll(level: Level): void {
-    level.classes.forEach( c=>{
+    level.classes.forEach(c => {
       c.assigned = true;
       this.updateClassInfo(c);
     });
   }
 
   unselectAll(level: Level): void {
-    level.classes.forEach( c=>{
-      if(c.works == 0)
+    level.classes.forEach(c => {
+      if (c.works == 0)
         c.assigned = false;
-        this.updateClassInfo(c);
+      this.updateClassInfo(c);
     });
   }
 }
