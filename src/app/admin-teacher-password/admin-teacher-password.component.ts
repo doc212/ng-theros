@@ -97,11 +97,21 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
     this.userService.updateClassInfo(this.user.id, this.currentSubject.id, info.class.id, info.assigned)
   }
 
+  allAssigned(level: Level): boolean {
+    return from(level.classes).all(c => c.assigned);
+
+  }
+
   selectAll(level: Level): void {
-    level.classes.forEach(c => {
-      c.assigned = true;
-      this.updateClassInfo(c);
-    });
+    if (this.allAssigned(level)) {
+      this.unselectAll(level);
+    }
+    else {
+      level.classes.forEach(c => {
+        c.assigned = true;
+        this.updateClassInfo(c);
+      });
+    }
   }
 
   unselectAll(level: Level): void {
