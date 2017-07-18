@@ -36,12 +36,12 @@ export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {
       let id = +params["id"];
       this.displayUser(id);
     })
-    this.childModal.onHide.subscribe( () => {
+    this.childModal.onHide.subscribe(() => {
       this.displayUser(this.user.id);
     })
   }
 
-  private displayUser(id : number){
+  private displayUser(id: number) {
     this.userService.getUser(id).then(user => {
       this.user = user;
       this.teachings =
