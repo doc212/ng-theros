@@ -19,6 +19,10 @@ import { AdminTeachersComponent } from './admin-teachers/admin-teachers.componen
 import { UserService } from './services/user.service';
 import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-teacher-password.component';
 
+import { ModalModule } from 'ngx-bootstrap';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +37,9 @@ import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-te
     BrowserModule,
     FormsModule,
     app_routing,
+    ButtonsModule.forRoot(),
+    ModalModule.forRoot(),
+    PopoverModule.forRoot(),
     RouterModule,
     HttpModule
   ],

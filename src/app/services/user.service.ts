@@ -3,10 +3,13 @@ import {User} from '../models/user';
 import {ApiService} from './api.service';
 import {AuthService} from './auth.service';
 import {Teaching} from 'app/models/teaching';
+import {Klass, UserClassInfo} from 'app/models/klass';
 
 class UserWithTeachings extends User {
-  teachings:Teaching[];
+  teachings: Teaching[];
 }
+
+
 
 @Injectable()
 export class UserService {
@@ -24,7 +27,7 @@ export class UserService {
     return this.api.get("/user/" + id).then(resp => resp.json() as UserWithTeachings);
   }
 
-  updateUser(user: User) : Promise<void> {
+  updateUser(user: User): Promise<void> {
     console.log("updating user", user);
     let _this = this;
     return this.api.put("/user", user).then(resp => {
@@ -33,5 +36,15 @@ export class UserService {
         _this.auth.updateToken(body.newToken);
       }
     });
+  }
+
+  getUserClasses(userId: number, subjectId: number): Promise<UserClassInfo[]> {
+    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId }).then(response => response.json() as UserClassInfo[])
+  }
+
+  updateClassInfo(userId: number, subjectId: number, classId: number, assigned: boolean): void {
+    this.api.put("/user_classes", {
+      userId: userId, classId: classId, assigned: assigned, subjectId: subjectId
+    })
   }
 }

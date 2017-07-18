@@ -28,6 +28,7 @@
     "linq": "^3.0.8",
     "lodash": "^4.17.4",
     "ng2-sweetalert2": "0.0.8",
+    "ngx-bootstrap": "^1.7.1",
     "rxjs": "^5.1.0",
     "slm-loader": "^0.2.3",
     "zone.js": "^0.8.4"
