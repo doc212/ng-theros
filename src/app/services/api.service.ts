@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import "rxjs/add/operator/toPromise";
 
-const API_URL = "http://localhost/~doc212/theros/app_dev.php/api";
+const API_URL = "https://5c8c26daa0bb650014f03bcc.mockapi.io/api/";
 
 @Injectable()
 export class ApiService {
