@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptionsArgs, Response, Headers } from "@angular/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import "rxjs/add/operator/toPromise";
 
@@ -9,7 +9,7 @@ const API_URL = "http://localhost/~doc212/theros/app_dev.php/api";
 export class ApiService {
 
   constructor(
-    private http: Http
+    private http: HttpClient
   ) { }
 
   token: string;
@@ -20,25 +20,25 @@ export class ApiService {
       options = options || {};
       options.params = params;
     }
-    return this.http.get(this.getUrl(url), options).toPromise();
+    return this.http.get<Response>(this.getUrl(url), options).toPromise();
   }
 
   post(url: string, data: any): Promise<Response> {
-    return this.http.post(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
+    return this.http.post<Response>(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
   }
 
   put(url: string, data: any): Promise<Response> {
-    return this.http.put(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
+    return this.http.put<Response>(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
   }
 
   private getUrl(url: string): string {
     return API_URL + url;
   }
 
-  private getRequestionOptions(): RequestOptionsArgs {
+  private getRequestionOptions(): {headers?: HttpHeaders, params?: any} {
     if (this.token) {
       return {
-        headers: new Headers(
+        headers: new HttpHeaders(
           { "Authorization": "Bearer " + this.token }
         )
       };
