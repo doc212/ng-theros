@@ -15,7 +15,7 @@ export class ApiService {
   token: string;
 
   get<T>(url: string, params: { [detais: string]: any } = null): Promise<T> {
-    let options = this.getRequestionOptions() || {};
+    let options = this.getRequestionOptions();
     if (params) {
       options.params = params;
     }
@@ -43,7 +43,7 @@ export class ApiService {
       };
     }
     else {
-      return null;
+      return {};
     }
   }
 }
