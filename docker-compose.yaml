@@ -1,8 +1,10 @@
 version: "2"
 services:
   web:
-    image: node:11.11
+    build: .
     volumes:
       - .:/app
-    command: bash
+    ports:
+      - "4200:4200"
+    command: ["ng","serve","--host=0.0.0.0"]
     working_dir: /app
