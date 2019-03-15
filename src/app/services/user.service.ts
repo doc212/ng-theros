@@ -20,11 +20,11 @@ export class UserService {
   ) { }
 
   getUsers(): Promise<User[]> {
-    return this.api.get("/login").then((resp) => resp.json());
+    return this.api.get("/login");
   }
 
   getUser(id: number): Promise<UserWithTeachings> {
-    return this.api.get("/user/" + id).then(resp => resp.json());
+    return this.api.get("/user/" + id);
   }
 
   updateUser(user: User): Promise<void> {
@@ -40,7 +40,7 @@ export class UserService {
   }
 
   getUserClasses(userId: number, subjectId: number): Promise<UserClassInfo[]> {
-    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId }).then(response => response.json())
+    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId });
   }
 
   updateClassInfo(userId: number, subjectId: number, classId: number, assigned: boolean): void {
