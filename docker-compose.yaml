@@ -1,0 +1,7 @@
+version: "2"
+services:
+  web:
+    image: node:11.11
+    volumes:
+      - .:/app
+    command: bash
