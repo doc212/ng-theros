@@ -15,7 +15,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-admin-teacher-password',
-  templateUrl: './admin-teacher-password.component.html.slim',
+  templateUrl: './admin-teacher-password.component.html.pug',
   styleUrls: ['./admin-teacher-password.component.css']
 })
 export class AdminTeacherPasswordComponent implements OnInit, OnDestroy {

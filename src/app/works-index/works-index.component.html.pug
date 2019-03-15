@@ -1,6 +1,6 @@
 .container *ngIf="filteredWorks"
-    .row
-        .col-xs-12
+    //- .row
+        //- .col-xs-12
             h2 Encodage des résultats
             h3 Professeur : {{auth.currentUser.fullname}}
             form.form-horizontal style="margin-top:20px"
@@ -8,32 +8,32 @@
                     .col-lg-1.col-sm-1.col-xs-2
                         label.control-label Filtrer
                     .col-lg-3.col-sm-11.col-xs-10
-                        input.form-control ref-terms=true placeholder="nom, classe, cours, type, professeur" on-input="filter(terms.value)"
+                        input.form-control(ref-terms=true placeholder="nom, classe, cours, type, professeur" on-input="filter(terms.value)")
                     .col-lg-1.col-sm-1.col-xs-2
                         label.control-label Type
                     .col-lg-2.col-sm-4.col-xs-10
-                        .btn-group data-toggle="buttons" on-change="refreshFilter()"
-                            label.btn.btn-primary  bind-ngClass="{active:typeFilter==''}"
-                                input type="radio" name="type" bindon-ngModel="typeFilter" value=""
+                        .btn-group(data-toggle="buttons" on-change="refreshFilter()")
+                            label.btn.btn-primary(bind-ngClass="{active:typeFilter==''}")
+                                input(type="radio" name="type" bindon-ngModel="typeFilter" value="")
                                 |Tous
                             label.btn.btn-primary  bind-ngClass="{active:typeFilter=='TDV'}"
-                                input type="radio" name="type" bindon-ngModel="typeFilter" value="TDV"
+                                input(type="radio" name="type" bindon-ngModel="typeFilter" value="TDV")
                                 |TDV
                             label.btn.btn-primary  bind-ngClass="{active:typeFilter=='RAN'}"
-                                input type="radio" name="type" bindon-ngModel="typeFilter" value="RAN"
+                                input(type="radio" name="type" bindon-ngModel="typeFilter" value="RAN")
                                 |RAN
                     .col-lg-2.col-sm-2.col-xs-2
                         label.control-label Encodé par
                     .col-lg-3.col-sm-5.col-xs-10
                         .btn-group data-toggle="buttons" on-change="refreshFilter()"
                             label.btn.btn-primary bind-ngClass="{active:showMyResults}"
-                                input type="checkbox" autocomplete="off" bindon-ngModel="showMyResults" bind-ngModelOptions="{standalone:true}"
+                                input(type="checkbox" autocomplete="off" bindon-ngModel="showMyResults" bind-ngModelOptions="{standalone:true}")
                                 |Moi
                             label.btn.btn-primary bind-ngClass="{active:showWithoutResults}"
-                                input type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults" bind-ngModelOptions="{standalone:true}"
+                                input(type="checkbox" autocomplete="off" bindon-ngModel="showWithoutResults" bind-ngModelOptions="{standalone:true}")
                                 |Personne
                             label.btn.btn-primary bind-ngClass="{active:showOtherResults}"
-                                input type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults" bind-ngModelOptions="{standalone:true}"
+                                input(type="checkbox" autocomplete="off" bindon-ngModel="showOtherResults" bind-ngModelOptions="{standalone:true}")
                                 |Autre
             div {{filteredWorks.length}} travaux affichés sur {{works.length}}
             table.table.table-striped.table-hover

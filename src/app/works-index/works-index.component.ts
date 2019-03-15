@@ -14,7 +14,7 @@ type RESULT_TYPE = "ALL" | "ME" | "NONE";
 @Component({
   providers: [SweetAlertService],
   selector: 'app-works-index',
-  templateUrl: './works-index.component.html.slim',
+  templateUrl: './works-index.component.html.pug',
   styleUrls: ['./works-index.component.css']
 })
 export class WorksIndexComponent implements OnInit {
