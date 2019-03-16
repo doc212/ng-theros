@@ -1,50 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptionsArgs, Response, Headers } from "@angular/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 import "rxjs/add/operator/toPromise";
 
-const API_URL = "http://localhost/~doc212/theros/app_dev.php/api";
+const API_URL = "https://5c8c26daa0bb650014f03bcc.mockapi.io/api/";
 
 @Injectable()
 export class ApiService {
 
   constructor(
-    private http: Http
+    private http: HttpClient
   ) { }
 
   token: string;
 
-  get(url: string, params: { [detais: string]: any } = null): Promise<Response> {
+  get<T>(url: string, params: { [detais: string]: any } = null): Promise<T> {
     let options = this.getRequestionOptions();
     if (params) {
-      options = options || {};
       options.params = params;
     }
-    return this.http.get(this.getUrl(url), options).toPromise();
+    return this.http.get<T>(this.getUrl(url), options).toPromise();
   }
 
-  post(url: string, data: any): Promise<Response> {
-    return this.http.post(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
+  post<T>(url: string, data: any): Promise<T> {
+    return this.http.post<T>(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
   }
 
   put(url: string, data: any): Promise<Response> {
-    return this.http.put(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
+    return this.http.put<Response>(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
   }
 
   private getUrl(url: string): string {
     return API_URL + url;
   }
 
-  private getRequestionOptions(): RequestOptionsArgs {
+  private getRequestionOptions(): {headers?: HttpHeaders, params?: any} {
     if (this.token) {
       return {
-        headers: new Headers(
+        headers: new HttpHeaders(
           { "Authorization": "Bearer " + this.token }
         )
       };
     }
     else {
-      return null;
+      return {};
     }
   }
 }

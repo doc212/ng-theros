@@ -6,7 +6,7 @@ import {AuthService} from 'app/services/auth.service';
 
 @Component({
   selector: 'app-admin-teachers',
-  templateUrl: './admin-teachers.component.html.slim',
+  templateUrl: './admin-teachers.component.html.pug',
   styleUrls: ['./admin-teachers.component.css']
 })
 export class AdminTeachersComponent implements OnInit {

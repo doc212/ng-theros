@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
-import { ApiService } from "app/services/api.service";
+import { LoginResponse } from 'app/models/DTOs/LoginResponse';
+import { ILoginService } from './interfaces/ILoginService';
+import { ApiService } from './api.service';
 
 const _CURRENT_USER_KEY = "theros.currentUser";
 const storage = sessionStorage;
@@ -14,8 +16,11 @@ export class AuthService {
   }
 
   constructor(
-    private api: ApiService
-  ) { }
+    private _loginService: ILoginService,
+    private api : ApiService
+  )
+  {
+  }
 
   loadFromStorage() {
     var json = storage.getItem(_CURRENT_USER_KEY);
@@ -25,23 +30,13 @@ export class AuthService {
   signIn(userId: number, password: string): Promise<boolean> {
     let _this = this;
     return new Promise<boolean>(function(resolve, reject) {
-      _this.api.post("/login", {
-        id: userId,
-        password: password
-      }).then((resp) => {
-        if (resp.ok) {
-          _this.handleResponse(resp.json());
+      _this._loginService.login(userId, password).then((resp) => {
+          _this.handleResponse(resp);
           resolve(true);
-        } else {
-          console.log("response not ok", resp.status);
-          _this.handleResponse(null);
-          resolve(false);
-        }
       }, (err) => {
-        console.log("signIn error", err);
-        if (err.status == 403) {
-          resolve(false);
-        }
+        console.log("login failed", err);
+        _this.handleResponse(null);
+        resolve(false);
       });
     });
   }
@@ -52,7 +47,7 @@ export class AuthService {
     this.handleResponse(null);
   }
 
-  private handleResponse(response: any, persist = true) {
+  private handleResponse(response: LoginResponse, persist = true) {
     if (persist)
       storage.setItem(_CURRENT_USER_KEY, JSON.stringify(response));
     if (response) {

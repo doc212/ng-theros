@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {User} from '../models/user';
-import {ApiService} from './api.service';
-import {AuthService} from './auth.service';
-import {Teaching} from 'app/models/teaching';
-import {Klass, UserClassInfo} from 'app/models/klass';
+import { User } from '../models/user';
+import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
+import { Teaching } from 'app/models/teaching';
+import { Klass, UserClassInfo } from 'app/models/klass';
+import { IUserService } from './interfaces/IUserService';
 
 class UserWithTeachings extends User {
   teachings: Teaching[];
@@ -12,19 +13,20 @@ class UserWithTeachings extends User {
 
 
 @Injectable()
-export class UserService {
+export class UserService implements IUserService {
 
   constructor(
     private auth: AuthService,
     private api: ApiService
-  ) { }
+  ) {
+  }
 
   getUsers(): Promise<User[]> {
-    return this.api.get("/login").then((resp) => resp.json() as User[]);
+    return this.api.get("/login");
   }
 
   getUser(id: number): Promise<UserWithTeachings> {
-    return this.api.get("/user/" + id).then(resp => resp.json() as UserWithTeachings);
+    return this.api.get("/user/" + id);
   }
 
   updateUser(user: User): Promise<void> {
@@ -32,14 +34,15 @@ export class UserService {
     let _this = this;
     return this.api.put("/user", user).then(resp => {
       if (resp.status == 200) {
-        let body = resp.json();
-        _this.auth.updateToken(body.newToken);
+        resp.json().then((body) => {
+          _this.auth.updateToken(body.newToken);
+        });
       }
     });
   }
 
   getUserClasses(userId: number, subjectId: number): Promise<UserClassInfo[]> {
-    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId }).then(response => response.json() as UserClassInfo[])
+    return this.api.get("/user_classes", { subjectId: subjectId, userId: userId });
   }
 
   updateClassInfo(userId: number, subjectId: number, classId: number, assigned: boolean): void {

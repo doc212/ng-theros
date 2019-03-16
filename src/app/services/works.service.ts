@@ -11,6 +11,6 @@ export class WorksService {
   ) { }
 
   getWorks(): Promise<Work[]> {
-    return this.api.get("/works").then(resp => resp.json() as Work[]);
+    return this.api.get("/works");
   }
 }

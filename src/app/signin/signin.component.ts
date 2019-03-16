@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
-import { UserService } from '../services/user.service';
 import { User } from "app/models/user";
+import { IUserService } from 'app/services/interfaces/IUserService';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html.slim',
+  templateUrl: './signin.component.html.pug',
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userService : UserService,
+    private userService : IUserService,
     private auth: AuthService
   ) { }
 

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule } from '@angular/router';
 import { app_routing } from "./app.routing"
@@ -22,6 +22,11 @@ import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-te
 import { ModalModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { ILoginService } from './services/interfaces/ILoginService';
+import { LoginService } from './services/LoginService';
+import { FakeLoginService } from './services/mocks/FakeLoginService';
+import { IUserService } from './services/interfaces/IUserService';
+import { FakeUserService } from './services/mocks/FakeUserService';
 
 @NgModule({
   declarations: [
@@ -41,13 +46,15 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     ModalModule.forRoot(),
     PopoverModule.forRoot(),
     RouterModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [
     AuthGuard,
     WorksService,
     ApiService,
     AuthService,
+    { provide: IUserService, useClass: FakeUserService },
+    { provide: ILoginService, useClass: FakeLoginService },
     UserService
   ],
   bootstrap: [AppComponent]
