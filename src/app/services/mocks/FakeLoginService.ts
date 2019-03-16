@@ -1,23 +1,19 @@
 import { ILoginService } from '../interfaces/ILoginService';
 import { LoginResponse } from 'app/models/DTOs/LoginResponse';
 import { Injectable } from '@angular/core';
+import { MockData } from './MockData';
 
 @Injectable()
 export class FakeLoginService implements ILoginService {
     login(userId: number, password: string): Promise<LoginResponse> {
         return new Promise<LoginResponse>((resolve, reject) => {
-            if (userId == 1) {
+            if (userId == 1 || userId == 2) {
                 resolve({
                     token: "some-token",
-                    user: {
-                        id: 1,
-                        fullname: "Some full name",
-                        admin: true,
-                        password: ""
-                    }
+                    user: MockData.users[userId - 1],
                 });
             } else {
-                reject("bad user id "+userId);
+                reject("bad user id " + userId);
             }
         })
     }
