@@ -22,8 +22,8 @@ export class ApiService {
     return this.http.get<T>(this.getUrl(url), options).toPromise();
   }
 
-  post(url: string, data: any): Promise<Response> {
-    return this.http.post<Response>(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
+  post<T>(url: string, data: any): Promise<T> {
+    return this.http.post<T>(this.getUrl(url), data, this.getRequestionOptions()).toPromise();
   }
 
   put(url: string, data: any): Promise<Response> {

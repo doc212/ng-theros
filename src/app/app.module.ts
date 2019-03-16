@@ -22,6 +22,9 @@ import { AdminTeacherPasswordComponent } from './admin-teacher-password/admin-te
 import { ModalModule } from 'ngx-bootstrap';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { ILoginService } from './services/interfaces/ILoginService';
+import { LoginService } from './services/LoginService';
+import { FakeLoginService } from './services/mocks/FakeLoginService';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     WorksService,
     ApiService,
     AuthService,
+    { provide: ILoginService, useClass: FakeLoginService },
     UserService
   ],
   bootstrap: [AppComponent]
