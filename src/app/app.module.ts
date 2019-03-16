@@ -25,6 +25,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ILoginService } from './services/interfaces/ILoginService';
 import { LoginService } from './services/LoginService';
 import { FakeLoginService } from './services/mocks/FakeLoginService';
+import { IUserService } from './services/interfaces/IUserService';
+import { FakeUserService } from './services/mocks/FakeUserService';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { FakeLoginService } from './services/mocks/FakeLoginService';
     WorksService,
     ApiService,
     AuthService,
+    { provide: IUserService, useClass: FakeUserService },
     { provide: ILoginService, useClass: FakeLoginService },
     UserService
   ],
