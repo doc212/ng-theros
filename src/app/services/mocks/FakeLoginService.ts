@@ -3,7 +3,7 @@ import { LoginResponse } from 'app/models/DTOs/LoginResponse';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class FakeLoginService extends ILoginService {
+export class FakeLoginService implements ILoginService {
     login(userId: number, password: string): Promise<LoginResponse> {
         return new Promise<LoginResponse>((resolve, reject) => {
             if (userId == 1) {

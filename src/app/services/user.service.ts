@@ -13,13 +13,12 @@ class UserWithTeachings extends User {
 
 
 @Injectable()
-export class UserService extends IUserService {
+export class UserService implements IUserService {
 
   constructor(
     private auth: AuthService,
     private api: ApiService
   ) {
-    super();
   }
 
   getUsers(): Promise<User[]> {

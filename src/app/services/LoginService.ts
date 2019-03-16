@@ -4,11 +4,10 @@ import { LoginResponse } from 'app/models/DTOs/LoginResponse';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class LoginService extends ILoginService {
+export class LoginService implements ILoginService {
     constructor(
         private _api: ApiService
     ) {
-        super();
     }
 
     login(userId: number, password: string): Promise<LoginResponse> {
